@@ -31,7 +31,7 @@ jobs:
           npm run build
 
       - name: Run Puppeteer Capture
-        run: npx ts-node generate-diagram.ts
+        run: npx ts-node --esm generate-diagram.ts
 
       - name: Commit and Push Image
         run: |
