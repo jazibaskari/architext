@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "usuario",
+      "data": { "label": "Usuario", "col": 0, "row": 2.5, "boxType": "user" }
+    },
+    {
+      "id": "floating-chat",
+      "data": {
+        "label": "FloatingChat.tsx",
+        "col": 1,
+        "row": 1.5,
+        "boxType": "frontend"
+      }
+    },
+    {
+      "id": "voice-token",
+      "data": {
+        "label": "voice-token.js",
+        "col": 1,
+        "row": 4,
+        "boxType": "function"
+      }
+    },
+    {
+      "id": "classify-intent",
+      "data": {
+        "label": "classifyIntent",
+        "col": 2,
+        "row": 0,
+        "boxType": "backend"
+      }
+    },
+    {
+      "id": "chat-js",
+      "data": { "label": "chat.js", "col": 2, "row": 1.5, "boxType": "backend" }
+    },
+    {
+      "id": "prompt-mgmt",
+      "data": {
+        "label": "Prompt Mgmt",
+        "col": 2,
+        "row": 2.75,
+        "boxType": "backend"
+      }
+    },
+    {
+      "id": "openai-realtime",
+      "data": {
+        "label": "OpenAI Realtime",
+        "col": 2,
+        "row": 4,
+        "boxType": "ai"
+      }
+    },
+    {
+      "id": "voice-trace",
+      "data": {
+        "label": "voice-trace.js",
+        "col": 2,
+        "row": 5.5,
+        "boxType": "tracing"
+      }
+    },
+    {
+      "id": "rag-pipeline",
+      "data": {
+        "label": "RAG Pipeline",
+        "col": 3,
+        "row": 1.5,
+        "boxType": "pipeline"
+      }
+    },
+    {
+      "id": "score-trace",
+      "data": {
+        "label": "scoreTrace",
+        "col": 3,
+        "row": 3,
+        "boxType": "tracing"
+      }
+    },
+    {
+      "id": "rag-search",
+      "data": {
+        "label": "rag-search.js",
+        "col": 3,
+        "row": 4,
+        "boxType": "function"
+      }
+    },
+    {
+      "id": "embeddings",
+      "data": {
+        "label": "OpenAI Embeddings",
+        "col": 4,
+        "row": 0.25,
+        "boxType": "data"
+      }
+    },
+    {
+      "id": "supabase",
+      "data": {
+        "label": "Supabase pgvector",
+        "col": 4,
+        "row": 1.5,
+        "boxType": "database"
+      }
+    },
+    {
+      "id": "haiku",
+      "data": {
+        "label": "Haiku Reranker",
+        "col": 4,
+        "row": 2.75,
+        "boxType": "data"
+      }
+    },
+    {
+      "id": "langfuse",
+      "data": {
+        "label": "Langfuse",
+        "col": 4,
+        "row": 4,
+        "boxType": "observability"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-u-fc",
+      "source": "usuario",
+      "target": "floating-chat",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-u-vt",
+      "source": "usuario",
+      "target": "voice-token",
+      "label": "Voice",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-fc-chat",
+      "source": "floating-chat",
+      "target": "chat-js",
+      "label": "POST /api/chat",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-chat-fc",
+      "source": "chat-js",
+      "target": "floating-chat",
+      "label": "SSE stream",
+      "sourceHandle": "top-source",
+      "targetHandle": "top-target",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-chat-class",
+      "source": "chat-js",
+      "target": "classify-intent",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-chat-prompt",
+      "source": "chat-js",
+      "target": "prompt-mgmt",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-chat-rag",
+      "source": "chat-js",
+      "target": "rag-pipeline",
+      "label": "tool_use?",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-chat-score",
+      "source": "chat-js",
+      "target": "score-trace",
+      "label": "waitUntil",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-chat-langfuse",
+      "source": "chat-js",
+      "target": "langfuse",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-vt-realtime",
+      "source": "voice-token",
+      "target": "openai-realtime",
+      "label": "ephemeral token",
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-realtime-ragsearch",
+      "source": "openai-realtime",
+      "target": "rag-search",
+      "label": "function_call",
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-realtime-voicetrace",
+      "source": "openai-realtime",
+      "target": "voice-trace",
+      "label": "session end",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-ragsearch-rag",
+      "source": "rag-search",
+      "target": "rag-pipeline",
+      "label": "trace",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-ragsearch-langfuse",
+      "source": "rag-search",
+      "target": "langfuse",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-score-langfuse",
+      "source": "score-trace",
+      "target": "langfuse",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-voicetrace-langfuse",
+      "source": "voice-trace",
+      "target": "langfuse",
+      "animated": true,
+      "style": { "stroke": "#888" }
+    },
+    {
+      "id": "e-rag-embed",
+      "source": "rag-pipeline",
+      "target": "embeddings",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-rag-supa",
+      "source": "rag-pipeline",
+      "target": "supabase",
+      "style": { "stroke": "#5ec2de" }
+    },
+    {
+      "id": "e-rag-haiku",
+      "source": "rag-pipeline",
+      "target": "haiku",
+      "style": { "stroke": "#5ec2de" }
+    }
+  ]
+}
