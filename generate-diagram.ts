@@ -25,8 +25,11 @@ async function generateArchitectureImage(
 ): Promise<void> {
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath:
-      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    // Use undefined in GitHub Actions so it falls back to the default Linux browser,
+    // otherwise use the local MacOS Chrome path.
+    executablePath: process.env.GITHUB_ACTIONS
+      ? undefined
+      : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
